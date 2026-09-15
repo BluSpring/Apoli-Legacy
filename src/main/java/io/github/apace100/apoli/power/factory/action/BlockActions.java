@@ -78,10 +78,8 @@ public class BlockActions {
                         new Vec2(0, 0),
                         (ServerLevel)block.getLeft(),
                         Apoli.config.executeCommand.getPermissionHandler(),
-                        blockName,
                         Component.translatable(blockName),
-                        server,
-                        null);
+                        server);
                     server.getCommands().performPrefixedCommand(source, data.getString("command"));
                 }
             }));

@@ -29,6 +29,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -150,7 +151,7 @@ public class EntityActions {
                 }
                 space.toGlobal(vec, entity);
                 method.accept(vec.x, vec.y, vec.z);
-                entity.hurtMarked = true;
+                entity.syncVelocity = true;
             }));
         register(SpawnEntityAction.getFactory());
         register(new ActionFactory<>(Apoli.identifier("gain_air"), new SerializableData()
@@ -208,8 +209,6 @@ public class EntityActions {
                         entity.getRotationVector(),
                         entity.level() instanceof ServerLevel ? (ServerLevel)entity.level() : null,
                         Apoli.config.executeCommand.getPermissionHandler(),
-                        entity.getName().getString(),
-                        entity.getDisplayName(),
                         entity.level().getServer(),
                         entity);
                     server.getCommands().performPrefixedCommand(source, data.getString("command"));
@@ -301,7 +300,7 @@ public class EntityActions {
                         }
                     }
                     if(entity instanceof Player) {
-                        ((Player)entity).getInventory().placeItemBackInInventory(stack);
+                        ((Player)entity).getInventory().placeItemBackInInventory(stack, Prediction.SERVER_ONLY);
                     } else {
                         entity.level().addFreshEntity(new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack));
                     }

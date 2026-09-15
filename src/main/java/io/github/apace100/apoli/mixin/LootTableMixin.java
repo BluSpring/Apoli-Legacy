@@ -6,8 +6,8 @@ import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.ReplaceLootTablePower;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.piglin.Piglin;
@@ -55,14 +55,14 @@ public class LootTableMixin implements IdentifiedLootTable {
         }
         if(context.hasParameter(LootContextParams.THIS_ENTITY)) {
             var type = ((ReplacingLootContext)context).getType();
-            Entity entity = context.getOptionalParameter(LootContextParams.THIS_ENTITY);
+            Entity entity = context.getOptional(LootContextParams.THIS_ENTITY);
             if(type == LootContextParamSets.FISHING) {
                 if(entity instanceof FishingHook bobber) {
                     entity = bobber.getPlayerOwner();
                 }
             } else if(type == LootContextParamSets.ENTITY) {
                 if(context.hasParameter(LootContextParams.DIRECT_ATTACKING_ENTITY)) { // TODO: this used to be KILLER_ENTITY
-                    entity = context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY);
+                    entity = context.getOptional(LootContextParams.DIRECT_ATTACKING_ENTITY);
                 }
             } else if(type == LootContextParamSets.PIGLIN_BARTER) {
                 if(entity instanceof Piglin piglin) {

@@ -39,6 +39,7 @@ repositories {
 	}
 	maven("https://maven.bawnorton.com/releases")
 	maven("https://maven.enjarai.dev/mirrors")
+	maven("https://maven.is-immensely.gay/releases")
 	mavenLocal()
 }
 
@@ -95,7 +96,7 @@ dependencies {
 	implementation("com.terraformersmc:modmenu:${project.property("modmenu_version")}")
 	include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.3")!!)!!)
 
-	include(api("maven.modrinth:additionalentityattributes:${project.property("aea_version")}")!!)
+	include(api("de.dafuqs:additionalentityattributes:${project.property("aea_version")}")!!)
 	// modImplementation "de.dafuqs:AdditionalEntityAttributes:${project.aea_version}"
 	// include "de.dafuqs:AdditionalEntityAttributes:${project.aea_version}"
 }

@@ -90,7 +90,7 @@ public class BiEntityActions {
                     method = target::setDeltaMovement;
                 Space.transformVectorToBase(target.position().subtract(actor.position()), vec, actor.getYRot(), true); // vector normalized by method
                 method.accept(vec.x, vec.y, vec.z);
-                target.hurtMarked = true;
+                target.syncVelocity = true;
             }));
         register(DamageAction.getFactory());
     }
