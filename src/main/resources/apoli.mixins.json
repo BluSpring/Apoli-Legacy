@@ -82,8 +82,7 @@
     "LocatorBarRendererMixin",
     "MinecraftClientMixin",
     "PlayerEntityRendererMixin",
-    "WorldRendererMixin",
-    "powers.night_vision.LightmapRenderStateExtractorMixin"
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
