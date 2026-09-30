@@ -3,6 +3,7 @@ package io.github.apace100.apoli.mixin;
 import io.github.apace100.apoli.access.EntityLinkedItemStack;
 import io.github.apace100.apoli.access.MutableItemStack;
 import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.legacy.OverlayableComponentsItemStack;
 import io.github.apace100.apoli.power.ActionOnItemUsePower;
 import io.github.apace100.apoli.power.PreventItemUsePower;
 import net.minecraft.core.component.PatchedDataComponentMap;
@@ -23,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin implements MutableItemStack, EntityLinkedItemStack {
+public abstract class ItemStackMixin implements MutableItemStack, EntityLinkedItemStack, OverlayableComponentsItemStack {
 
     @Shadow @Deprecated private Item item;
 
@@ -155,6 +156,10 @@ public abstract class ItemStackMixin implements MutableItemStack, EntityLinkedIt
     @Override
     public void setItem(Item item) {
         this.item = item;
+
+        if (this.apoli$holdingEntity instanceof LivingEntity entity) {
+            this.apoli_legacy$updateOverlayableComponents(entity);
+        }
     }
 
     @Override
@@ -163,5 +168,9 @@ public abstract class ItemStackMixin implements MutableItemStack, EntityLinkedIt
         if (stack.getComponents() instanceof PatchedDataComponentMap map)
             components = map;
         count = stack.getCount();
+
+        if (this.apoli$holdingEntity instanceof LivingEntity entity) {
+            this.apoli_legacy$updateOverlayableComponents(entity);
+        }
     }
 }
