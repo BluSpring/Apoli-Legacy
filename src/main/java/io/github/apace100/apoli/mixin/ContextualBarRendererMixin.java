@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Mixin({ExperienceBar.class, JumpableVehicleBar.class, LocatorBar.class})
 public abstract class ContextualBarRendererMixin {
-    @Shadow @Final private Minecraft minecraft;
+    @Shadow(remap = false) @Final private Minecraft minecraft;
 
     @ModifyArg(method = "extractBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"), index = 1)
     public Identifier changeXpBarTextures(Identifier original) {
