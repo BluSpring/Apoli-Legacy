@@ -137,7 +137,7 @@ public class ReplaceLootTablePower extends Power {
         int count = 0;
         while(!REPLACEMENT_STACK.isEmpty()) {
             LootTable t = pop();
-            stringBuilder.append(t == null ? "null" : ((IdentifiedLootTable)t).getId());
+            stringBuilder.append(t == null ? "null" : ((IdentifiedLootTable)t).apoli$getId());
             if(!REPLACEMENT_STACK.isEmpty()) {
                 stringBuilder.append(", ");
             }
@@ -150,7 +150,7 @@ public class ReplaceLootTablePower extends Power {
         }
         while(BACKTRACK_STACK.size() > 0) {
             LootTable t = restore();
-            stringBuilder.append(t == null ? "null" : ((IdentifiedLootTable)t).getId());
+            stringBuilder.append(t == null ? "null" : ((IdentifiedLootTable)t).apoli$getId());
             if(!BACKTRACK_STACK.isEmpty()) {
                 stringBuilder.append(", ");
             }

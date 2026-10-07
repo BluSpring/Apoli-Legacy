@@ -38,13 +38,13 @@ public class LootTableMixin implements IdentifiedLootTable {
     private HolderGetter.Provider apoli$lootManager;
 
     @Override
-    public void setId(Identifier id, HolderGetter.Provider lootManager) {
+    public void apoli$setId(Identifier id, HolderGetter.Provider lootManager) {
         apoli$id = id;
         apoli$lootManager = lootManager;
     }
 
     @Override
-    public Identifier getId() {
+    public Identifier apoli$getId() {
         return apoli$id;
     }
 
@@ -53,6 +53,9 @@ public class LootTableMixin implements IdentifiedLootTable {
         if(((ReplacingLootContext)context).isReplaced((LootTable)(Object)this)) {
             return;
         }
+        if (apoli$id == null || apoli$lootManager == null)
+            return;
+
         if(context.hasParameter(LootContextParams.THIS_ENTITY)) {
             var type = ((ReplacingLootContext)context).getType();
             Entity entity = context.getOptional(LootContextParams.THIS_ENTITY);
