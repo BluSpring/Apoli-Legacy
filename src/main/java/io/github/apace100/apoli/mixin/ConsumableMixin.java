@@ -63,6 +63,6 @@ public class ConsumableMixin {
     private static boolean preventApplyingFoodEffects(List instance, Consumer consumer, @Local(argsOnly = true, name = "stack") ItemStack stack, @Local(argsOnly = true, name = "user") LivingEntity user) {
         return PowerHolderComponent.getPowers(user, ModifyFoodPower.class)
             .stream().filter(p -> p.doesApply(stack))
-            .anyMatch(ModifyFoodPower::doesPreventEffects);
+            .noneMatch(ModifyFoodPower::doesPreventEffects);
     }
 }
