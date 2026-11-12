@@ -113,8 +113,11 @@ public abstract class LivingEntityMixin extends Entity implements ModifiableFood
     @Inject(method = "setLastHurtByMob", at = @At("TAIL"))
     private void syncAttacker(LivingEntity attacker, CallbackInfo ci) {
         if(!level().isClientSide()) {
+            Optional<Integer> attackerId = Optional.ofNullable(this.lastHurtByMob)
+                    .map(reference -> reference.getEntity(this.level(), LivingEntity.class))
+                    .map(LivingEntity::getId);
             for (ServerPlayer player : PlayerLookup.tracking(this)) {
-                ServerPlayNetworking.send(player, new SetAttackerPacket(getId(), this.lastHurtByMob == null ? Optional.empty() : Optional.of(this.lastHurtByMob.getEntity(this.level(), LivingEntity.class).getId())));
+                ServerPlayNetworking.send(player, new SetAttackerPacket(getId(), attackerId));
             }
         }
     }
